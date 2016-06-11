@@ -16,9 +16,9 @@ public class ExampleAuthenticator implements Authenticator<BasicCredentials, Use
      * Valid users with mapping user -> roles
      */
     private static final Map<String, Set<String>> VALID_USERS = ImmutableMap.of(
-        "guest", ImmutableSet.of(),
-        "good-guy", ImmutableSet.of("BASIC_GUY"),
-        "chief-wizard", ImmutableSet.of("ADMIN", "BASIC_GUY")
+            "guest", ImmutableSet.of(),
+            "good-guy", ImmutableSet.of("BASIC_GUY"),
+            "chief-wizard", ImmutableSet.of("ADMIN", "BASIC_GUY")
     );
 
     @Override
