@@ -1,8 +1,6 @@
 package com.j0llysnowman.movies.dao;
 
 import com.j0llysnowman.movies.domain.Person;
-import lombok.Getter;
-import lombok.Setter;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -16,8 +14,6 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by david on 6/11/16.
  */
-@Getter
-@Setter
 public abstract class PersonDaoTest extends BaseEntityDaoTest<Person> {
 
     @Test
