@@ -1,12 +1,12 @@
 package com.j0llysnowman.movies.dao;
 
+import java.time.LocalDate;
+import java.util.UUID;
+
 import com.j0llysnowman.movies.domain.ParkingSpot;
 import com.j0llysnowman.movies.domain.Person;
 import com.j0llysnowman.movies.domain.Reservation;
-import com.j0llysnowman.movies.domain.Uri;
-
-import java.time.LocalDate;
-import java.util.UUID;
+import com.j0llysnowman.movies.domain.UriParts;
 
 /**
  * Created by david on 6/17/16.
@@ -18,8 +18,7 @@ public abstract class ReservationDaoTest extends BaseEntityDaoTest<Reservation> 
         Reservation reservation = new Reservation();
 
         reservation.setReservationDate(LocalDate.now());
-        reservation.setSquatterUri(new Uri<>(generatePerson()));
-        reservation.setParkingSpotUri(new Uri<>(generateParkingSpot()));
+        reservation.setSquatterUri(new UriParts<>(generatePerson()));
 
         return reservation;
     }
@@ -28,7 +27,7 @@ public abstract class ReservationDaoTest extends BaseEntityDaoTest<Reservation> 
         ParkingSpot parkingSpot = new ParkingSpot();
 
         parkingSpot.setLocation("HQ105");
-        parkingSpot.setOwner(new Uri<>(generatePerson()));
+        parkingSpot.setOwnerUri(new UriParts<>(generatePerson()));
 
         return parkingSpot;
     }

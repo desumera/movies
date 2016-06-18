@@ -1,13 +1,14 @@
 package com.j0llysnowman.movies.resource;
 
-import com.codahale.metrics.annotation.Timed;
-import com.google.common.collect.Sets;
-import com.j0llysnowman.movies.domain.Movie;
-import com.j0llysnowman.movies.domain.Person;
-import com.j0llysnowman.movies.domain.Uri;
-import com.j0llysnowman.movies.domain.enums.MpaaRating;
-import com.j0llysnowman.movies.domain.enums.Role;
-import com.j0llysnowman.movies.facade.MovieFacade;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,14 +20,15 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+
+import com.codahale.metrics.annotation.Timed;
+import com.google.common.collect.Sets;
+import com.j0llysnowman.movies.crud.MovieCrud;
+import com.j0llysnowman.movies.domain.Movie;
+import com.j0llysnowman.movies.domain.Person;
+import com.j0llysnowman.movies.domain.enums.MpaaRating;
+import com.j0llysnowman.movies.domain.enums.Role;
+import com.j0llysnowman.movies.facade.MovieFacade;
 
 /**
  * Created by david on 6/11/16.
@@ -34,7 +36,7 @@ import java.util.UUID;
 @Path("/movies")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class MovieResource {
+public class MovieResource implements MovieCrud {
 
     private final String defaultMovieTitle;
 
@@ -46,15 +48,17 @@ public class MovieResource {
     }
 
     @GET
+    @Path("sample")
     @Timed
-    public Movie getSampleMovie(@QueryParam("title") String title) {
+    public Movie getSampleMovie(
+        @QueryParam("title")
+        String title) {
         Movie movie = new Movie();
 
         movie.setTitle(Optional.ofNullable(title).orElse(defaultMovieTitle));
         movie.setReleaseYear(LocalDate.of(2000, Month.JANUARY, 1));
         movie.setRating(MpaaRating.PG);
         movie.setUuid(UUID.randomUUID());
-        movie.setUri(new Uri<>(movie));
         movie.setEtag(1L);
         movie.setCreateDate(LocalDate.now());
         movie.setUpdateDate(LocalDate.now());
@@ -77,10 +81,10 @@ public class MovieResource {
         star.setCreateDate(LocalDate.now());
         star.setUpdateDate(LocalDate.now());
 
-        Map<Person, Set<Role>> staff = new HashMap<>();
-        staff.put(director, Collections.singleton(Role.DIRECTOR));
-        staff.put(producer, Collections.singleton(Role.PRODUCER));
-        staff.put(star, Sets.newHashSet(Role.PRODUCER, Role.CAST));
+        Map<UUID, Set<Role>> staff = new HashMap<>();
+        staff.put(UUID.randomUUID(), Collections.singleton(Role.DIRECTOR));
+        staff.put(UUID.randomUUID(), Collections.singleton(Role.PRODUCER));
+        staff.put(UUID.randomUUID(), Sets.newHashSet(Role.PRODUCER, Role.CAST));
         movie.setStaff(staff);
 
         return movie;
@@ -88,29 +92,38 @@ public class MovieResource {
 
     @POST
     @Timed
-    @Path("movie")
-    public Movie createMovie(Movie movie) {
+    public Movie create(Movie movie) {
         return movieFacade.create(movie);
     }
 
     @GET
     @Timed
-    @Path("movie/{movieUuid}")
-    public Movie getMovie(@PathParam("movieUuid") UUID movieUuid) {
+    @Path("{movieUuid}")
+    public Movie get(
+        @PathParam("movieUuid")
+        UUID movieUuid) {
         return movieFacade.get(movieUuid);
     }
 
     @PUT
     @Timed
-    @Path("movie")
-    public Movie updateMovie(Movie movie) {
+    public Movie update(Movie movie) {
         return movieFacade.update(movie);
     }
 
     @DELETE
     @Timed
-    @Path("movie/{movieUuid}")
-    public Movie deleteMovie(@PathParam("movieUuid") UUID movieUuid) {
+    @Path("{movieUuid}")
+    public Movie delete(
+        @PathParam("movieUuid")
+        UUID movieUuid) {
         return movieFacade.delete(movieUuid);
+    }
+
+    @GET
+    @Timed
+    @Override
+    public List<Movie> getAll() {
+        return movieFacade.getAll();
     }
 }

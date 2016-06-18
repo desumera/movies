@@ -1,5 +1,7 @@
 package com.j0llysnowman.movies.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -10,11 +12,19 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class ParkingSpot extends BaseEntity {
+public class ParkingSpot extends BaseEntity<ParkingSpot> {
 
-//    private List<Reservation> calendar;
+    @JsonProperty
+    private Calendar calendar;
 
+    @JsonProperty
     private String location;
 
-    private Uri<Person> owner;
+    @JsonProperty
+    private UriParts<Person> ownerUri;
+
+    @Override
+    public UriParts<ParkingSpot> getUriParts() {
+        return new UriParts<>(this);
+    }
 }

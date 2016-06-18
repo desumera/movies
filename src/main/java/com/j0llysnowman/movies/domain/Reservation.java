@@ -1,10 +1,12 @@
 package com.j0llysnowman.movies.domain;
 
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-
-import java.time.LocalDate;
 
 /**
  * Created by david on 6/17/16.
@@ -12,13 +14,20 @@ import java.time.LocalDate;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class Reservation extends BaseEntity implements Comparable<Reservation> {
+public class Reservation extends BaseEntity<Reservation> implements Comparable<Reservation> {
 
+    @JsonProperty
     private LocalDate reservationDate;
 
-    private Uri<ParkingSpot> parkingSpotUri;
+    //    private UriParts<ParkingSpot> parkingSpotUri;
 
-    private Uri<Person> squatterUri;
+    @JsonProperty
+    private UriParts<Person> squatterUri;
+
+    @Override
+    public UriParts<Reservation> getUriParts() {
+        return new UriParts<>(this);
+    }
 
     @Override
     public int compareTo(Reservation o) {

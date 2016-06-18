@@ -1,15 +1,17 @@
 package com.j0llysnowman.movies.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.j0llysnowman.movies.domain.enums.MpaaRating;
-import com.j0llysnowman.movies.domain.enums.Role;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.j0llysnowman.movies.domain.enums.MpaaRating;
+import com.j0llysnowman.movies.domain.enums.Role;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Created by david on 6/11/16.
@@ -26,8 +28,13 @@ public class Movie extends BaseEntity {
     private LocalDate releaseYear;
 
     @JsonProperty(required = true)
-    private Map<Person, Set<Role>> staff;
+    private Map<UUID, Set<Role>> staff;
 
     @JsonProperty(required = true)
     private MpaaRating rating;
+
+    @Override
+    public UriParts<Movie> getUriParts() {
+        return new UriParts<>(this);
+    }
 }

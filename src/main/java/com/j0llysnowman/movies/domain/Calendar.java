@@ -1,5 +1,7 @@
 package com.j0llysnowman.movies.domain;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -7,19 +9,18 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * Created by david on 6/11/16.
+ * Created by dsumera on 6/18/16.
  */
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class Person extends BaseEntity<Person> {
+public class Calendar extends BaseEntity<Calendar> {
 
-    @JsonProperty(required = true)
-    private String name;
+    @JsonProperty
+    private List<Reservation> reservations;
 
     @Override
-    public UriParts<Person> getUriParts() {
+    public UriParts<Calendar> getUriParts() {
         return new UriParts<>(this);
     }
-
 }
