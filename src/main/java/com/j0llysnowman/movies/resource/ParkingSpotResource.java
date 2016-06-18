@@ -1,6 +1,7 @@
 package com.j0llysnowman.movies.resource;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import com.codahale.metrics.annotation.Timed;
 import com.j0llysnowman.movies.crud.ParkingSpotCrud;
 import com.j0llysnowman.movies.dao.ParkingSpotDao;
+import com.j0llysnowman.movies.domain.Calendar;
 import com.j0llysnowman.movies.domain.ParkingSpot;
 import com.j0llysnowman.movies.domain.Person;
 import com.j0llysnowman.movies.domain.Reservation;
@@ -52,22 +54,22 @@ public class ParkingSpotResource implements ParkingSpotCrud {
         reservation2.setCreateDate(LocalDate.now().minusMonths(1));
         reservation2.setUpdateDate(LocalDate.now().minusMonths(1));
 
-        //        Calendar calendar = new Calendar();
-        //        calendar.setUuid(UUID.randomUUID());
-        //        calendar.setReservations(Arrays.asList(
-        //            reservation1
-        //            , reservation2
-        //        ));
-        //        calendar.setEtag(5L);
-        //        calendar.setCreateDate(LocalDate.now().minusYears(5));
-        //        calendar.setUpdateDate(LocalDate.now().minusMonths(1));
+        Calendar calendar = new Calendar();
+        calendar.setUuid(UUID.randomUUID());
+        calendar.setReservations(Arrays.asList(
+            reservation1
+            , reservation2
+        ));
+        calendar.setEtag(5L);
+        calendar.setCreateDate(LocalDate.now().minusYears(5));
+        calendar.setUpdateDate(LocalDate.now().minusMonths(1));
 
         ParkingSpot parkingSpot = new ParkingSpot();
         parkingSpot.setOwnerUri(new UriParts<>(Person.class, UUID.randomUUID()));
         parkingSpot.setUuid(UUID.randomUUID());
         parkingSpot.setLocation("HQ-1");
         parkingSpot.setEtag(3L);
-        parkingSpot.setCalendar(null);
+        parkingSpot.setCalendar(calendar);
         parkingSpot.setCreateDate(LocalDate.now().minusYears(5));
         parkingSpot.setUpdateDate(LocalDate.now().minusYears(2));
 
