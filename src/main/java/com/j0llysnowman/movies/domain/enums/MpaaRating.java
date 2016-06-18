@@ -1,4 +1,4 @@
-package com.j0llysnowman.movies.domain;
+package com.j0llysnowman.movies.domain.enums;
 
 /**
  * Created by david on 6/11/16.

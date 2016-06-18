@@ -1,4 +1,4 @@
-package com.j0llysnowman.movies.dao;
+package com.j0llysnowman.movies.crud;
 
 import com.j0llysnowman.movies.domain.BaseEntity;
 
@@ -8,7 +8,7 @@ import java.util.UUID;
 /**
  * Created by david on 6/11/16.
  */
-public interface EntityDao<Entity extends BaseEntity> {
+public interface EntityCrud<Entity extends BaseEntity> {
 
     Entity create(Entity entity);
 

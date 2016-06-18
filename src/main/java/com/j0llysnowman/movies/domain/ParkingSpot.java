@@ -1,18 +1,20 @@
 package com.j0llysnowman.movies.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * Created by david on 6/11/16.
+ * Created by david on 6/17/16.
  */
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class Person extends BaseEntity {
+public class ParkingSpot extends BaseEntity {
 
-    @JsonProperty(required = true)
-    private String name;
+//    private List<Reservation> calendar;
+
+    private String location;
+
+    private Uri<Person> owner;
 }

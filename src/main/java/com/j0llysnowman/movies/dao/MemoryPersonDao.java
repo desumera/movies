@@ -11,12 +11,16 @@ import java.util.List;
 public class MemoryPersonDao extends MemoryEntityDao<Person> implements PersonDao {
 
     @Override
-    public List<Person> findByName(String name) {
+    public Person findByName(String name) {
         Preconditions.checkNotNull(name);
 
         List<Person> people = getAll();
-        people.removeIf(person -> !name.equals(person.getName()));
+        for (Person person : people) {
+            if (name.equals(person.getName())) {
+                return person;
+            }
+        }
 
-        return people;
+        return null;
     }
 }

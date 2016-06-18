@@ -3,9 +3,10 @@ package com.j0llysnowman.movies.resource;
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.collect.Sets;
 import com.j0llysnowman.movies.domain.Movie;
-import com.j0llysnowman.movies.domain.MpaaRating;
 import com.j0llysnowman.movies.domain.Person;
-import com.j0llysnowman.movies.domain.Role;
+import com.j0llysnowman.movies.domain.Uri;
+import com.j0llysnowman.movies.domain.enums.MpaaRating;
+import com.j0llysnowman.movies.domain.enums.Role;
 import com.j0llysnowman.movies.facade.MovieFacade;
 
 import javax.ws.rs.Consumes;
@@ -53,6 +54,7 @@ public class MovieResource {
         movie.setReleaseYear(LocalDate.of(2000, Month.JANUARY, 1));
         movie.setRating(MpaaRating.PG);
         movie.setUuid(UUID.randomUUID());
+        movie.setUri(new Uri<>(movie));
         movie.setEtag(1L);
         movie.setCreateDate(LocalDate.now());
         movie.setUpdateDate(LocalDate.now());

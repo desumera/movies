@@ -1,6 +1,8 @@
 package com.j0llysnowman.movies.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.j0llysnowman.movies.domain.enums.MpaaRating;
+import com.j0llysnowman.movies.domain.enums.Role;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -17,15 +19,15 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 public class Movie extends BaseEntity {
 
-    @JsonProperty
+    @JsonProperty(required = true)
     private String title;
 
-    @JsonProperty
+    @JsonProperty(required = true)
     private LocalDate releaseYear;
 
-    @JsonProperty
+    @JsonProperty(required = true)
     private Map<Person, Set<Role>> staff;
 
-    @JsonProperty
+    @JsonProperty(required = true)
     private MpaaRating rating;
 }

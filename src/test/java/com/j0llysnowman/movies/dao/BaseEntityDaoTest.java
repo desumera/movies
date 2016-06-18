@@ -1,8 +1,11 @@
 package com.j0llysnowman.movies.dao;
 
+import com.j0llysnowman.movies.crud.EntityCrud;
 import com.j0llysnowman.movies.domain.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -16,7 +19,13 @@ import static org.junit.Assert.assertNull;
 @Getter
 public abstract class BaseEntityDaoTest<Entity extends BaseEntity> {
 
-    private EntityDao<Entity> dao;
+    private EntityCrud<Entity> dao;
+
+    @Before
+    public abstract void setup();
+
+    @After
+    public abstract void tearDown();
 
     @Test
     public void testCrud() {

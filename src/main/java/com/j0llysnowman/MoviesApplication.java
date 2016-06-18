@@ -1,5 +1,10 @@
 package com.j0llysnowman;
 
+import com.j0llysnowman.movies.dao.MemoryMovieDao;
+import com.j0llysnowman.movies.dao.MemoryPersonDao;
+import com.j0llysnowman.movies.dao.MovieDao;
+import com.j0llysnowman.movies.dao.PersonDao;
+import com.j0llysnowman.movies.facade.MovieFacade;
 import com.j0llysnowman.movies.resource.MovieResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -26,7 +31,10 @@ public class MoviesApplication extends Application<MoviesConfiguration> {
 
     @Override
     public void run(MoviesConfiguration configuration, Environment environment) {
-        final MovieResource resource = new MovieResource(configuration.getDefaultMovieTitle());
+        final MovieDao movieDao = new MemoryMovieDao();
+        final PersonDao personDao = new MemoryPersonDao();
+        final MovieFacade movieFacade = new MovieFacade(movieDao, personDao);
+        final MovieResource resource = new MovieResource(configuration.getDefaultMovieTitle(), movieFacade);
 
         environment.jersey().register(resource);
     }

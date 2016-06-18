@@ -3,7 +3,7 @@ package com.j0llysnowman.movies.dao;
 import com.google.common.base.Preconditions;
 import com.j0llysnowman.movies.domain.Movie;
 import com.j0llysnowman.movies.domain.Person;
-import com.j0llysnowman.movies.domain.Role;
+import com.j0llysnowman.movies.domain.enums.Role;
 
 import java.util.List;
 import java.util.Set;

@@ -1,7 +1,9 @@
 package com.j0llysnowman.movies.dao;
 
 import com.google.common.base.Preconditions;
+import com.j0llysnowman.movies.crud.EntityCrud;
 import com.j0llysnowman.movies.domain.BaseEntity;
+import com.j0llysnowman.movies.domain.Uri;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +14,7 @@ import java.util.UUID;
 /**
  * Created by david on 6/11/16.
  */
-public class MemoryEntityDao<Entity extends BaseEntity> implements EntityDao<Entity> {
+public class MemoryEntityDao<Entity extends BaseEntity> implements EntityCrud<Entity> {
 
     private Map<UUID, Entity> database;
 
@@ -34,7 +36,13 @@ public class MemoryEntityDao<Entity extends BaseEntity> implements EntityDao<Ent
     public Entity get(UUID entityUuid) {
         Preconditions.checkNotNull(entityUuid);
 
-        return database.get(entityUuid);
+        Entity entity = database.get(entityUuid);
+
+        if (entity != null) {
+            entity.setUri(new Uri<>(entity));
+        }
+
+        return entity;
     }
 
     @Override

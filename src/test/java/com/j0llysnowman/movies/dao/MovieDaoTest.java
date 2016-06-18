@@ -1,9 +1,9 @@
 package com.j0llysnowman.movies.dao;
 
 import com.j0llysnowman.movies.domain.Movie;
-import com.j0llysnowman.movies.domain.MpaaRating;
+import com.j0llysnowman.movies.domain.enums.MpaaRating;
 import com.j0llysnowman.movies.domain.Person;
-import com.j0llysnowman.movies.domain.Role;
+import com.j0llysnowman.movies.domain.enums.Role;
 import org.junit.Test;
 
 import java.time.LocalDate;

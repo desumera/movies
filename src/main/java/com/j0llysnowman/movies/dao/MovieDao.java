@@ -1,19 +1,9 @@
 package com.j0llysnowman.movies.dao;
 
-import com.j0llysnowman.movies.domain.Movie;
-
-import java.util.List;
+import com.j0llysnowman.movies.crud.MovieCrud;
 
 /**
- * Created by david on 6/11/16.
+ * Created by david on 6/17/16.
  */
-public interface MovieDao extends EntityDao<Movie> {
-
-    List<Movie> findByTitle(String title);
-
-    List<Movie> findByDirector(String director);
-
-    List<Movie> findByProducer(String producer);
-
-    List<Movie> findByCastMember(String castMember);
+public interface MovieDao extends MovieCrud {
 }

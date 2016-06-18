@@ -11,12 +11,14 @@ public class MemoryPersonDaoTest extends PersonDaoTest {
     private MemoryPersonDao memoryPersonDao;
 
     @Before
+    @Override
     public void setup() {
         memoryPersonDao = new MemoryPersonDao();
         setDao(memoryPersonDao);
     }
 
     @After
+    @Override
     public void tearDown() {
         memoryPersonDao = null;
     }
