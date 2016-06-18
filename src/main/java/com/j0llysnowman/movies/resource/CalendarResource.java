@@ -6,8 +6,12 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -66,26 +70,42 @@ public class CalendarResource implements CalendarCrud {
         return calendar;
     }
 
+    @POST
+    @Timed
     @Override
     public Calendar create(Calendar entity) {
-        return null;
+        return calendarDao.create(entity);
     }
 
+    @GET
+    @Timed
+    @Path("{uuid}")
     @Override
-    public Calendar get(UUID entityUuid) {
-        return null;
+    public Calendar get(
+        @PathParam("uuid")
+        UUID entityUuid) {
+        return calendarDao.get(entityUuid);
     }
 
+    @PUT
+    @Timed
     @Override
     public Calendar update(Calendar entity) {
-        return null;
+        return calendarDao.update(entity);
     }
 
+    @DELETE
+    @Timed
+    @Path("{uuid}")
     @Override
-    public Calendar delete(UUID entityUuid) {
-        return null;
+    public Calendar delete(
+        @PathParam("uuid")
+        UUID entityUuid) {
+        return calendarDao.delete(entityUuid);
     }
 
+    @GET
+    @Timed
     @Override
     public List<Calendar> getAll() {
         return null;
