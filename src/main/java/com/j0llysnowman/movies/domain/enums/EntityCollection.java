@@ -2,10 +2,10 @@ package com.j0llysnowman.movies.domain.enums;
 
 import com.j0llysnowman.movies.domain.BaseEntity;
 import com.j0llysnowman.movies.domain.Calendar;
-import com.j0llysnowman.movies.domain.Movie;
 import com.j0llysnowman.movies.domain.ParkingSpot;
 import com.j0llysnowman.movies.domain.Person;
 import com.j0llysnowman.movies.domain.Reservation;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -19,7 +19,6 @@ public enum EntityCollection {
     PERSONS(Person.class, "persons"),
     PARKING_SPOTS(ParkingSpot.class, "parkingSpots"),
     RESERVATIONS(Reservation.class, "reservations"),
-    MOVIES(Movie.class, "movies"),
     CALENDARS(Calendar.class, "calendars");
 
     private Class entity;

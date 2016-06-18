@@ -6,8 +6,12 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -20,15 +24,21 @@ import com.j0llysnowman.movies.domain.Person;
 import com.j0llysnowman.movies.domain.Reservation;
 import com.j0llysnowman.movies.domain.UriParts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Created by dsumera on 6/18/16.
  */
 @Path("/parkingSpots")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class ParkingSpotResource implements ParkingSpotCrud {
+public class ParkingSpotResource implements ParkingSpotCrud
+    {
 
-    final ParkingSpotDao parkingSpotDao;
+    private static final Logger log = LoggerFactory.getLogger(ParkingSpotResource.class);
+
+    private final ParkingSpotDao parkingSpotDao;
 
     public ParkingSpotResource(ParkingSpotDao parkingSpotDao) {
         this.parkingSpotDao = parkingSpotDao;
@@ -38,6 +48,8 @@ public class ParkingSpotResource implements ParkingSpotCrud {
     @Timed
     @Path("sample")
     public ParkingSpot getSample() {
+        log.info("GETting sample ParkingSpot");
+
         Reservation reservation1 = new Reservation();
         reservation1.setReservationDate(LocalDate.now().plusMonths(1));
         reservation1.setSquatterUri(new UriParts<>(Person.class, UUID.randomUUID()));
@@ -76,28 +88,47 @@ public class ParkingSpotResource implements ParkingSpotCrud {
         return parkingSpot;
     }
 
+    @POST
+    @Timed
     @Override
     public ParkingSpot create(ParkingSpot entity) {
-        return null;
+        return parkingSpotDao.create(entity);
     }
 
+    @GET
+    @Timed
+    @Path("{uuid}")
     @Override
-    public ParkingSpot get(UUID entityUuid) {
-        return null;
+    public ParkingSpot get(
+        @PathParam("uuid")
+        UUID entityUuid
+    )
+    {
+        return parkingSpotDao.get(entityUuid);
     }
 
+    @PUT
+    @Timed
     @Override
     public ParkingSpot update(ParkingSpot entity) {
-        return null;
+        return parkingSpotDao.update(entity);
     }
 
+    @DELETE
+    @Timed
+    @Path("{uuid}")
     @Override
-    public ParkingSpot delete(UUID entityUuid) {
+    public ParkingSpot delete(
+        @PathParam("uuid")
+        UUID entityUuid)
+    {
         return null;
     }
 
+    @GET
+    @Timed
     @Override
     public List<ParkingSpot> getAll() {
         return null;
     }
-}
+    }

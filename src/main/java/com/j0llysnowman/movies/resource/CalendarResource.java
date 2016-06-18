@@ -29,7 +29,8 @@ import com.j0llysnowman.movies.domain.UriParts;
 @Path("/calendars")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class CalendarResource implements CalendarCrud {
+public class CalendarResource implements CalendarCrud
+    {
 
     private final CalendarDao calendarDao;
 
@@ -83,7 +84,8 @@ public class CalendarResource implements CalendarCrud {
     @Override
     public Calendar get(
         @PathParam("uuid")
-        UUID entityUuid) {
+        UUID entityUuid)
+    {
         return calendarDao.get(entityUuid);
     }
 
@@ -100,7 +102,8 @@ public class CalendarResource implements CalendarCrud {
     @Override
     public Calendar delete(
         @PathParam("uuid")
-        UUID entityUuid) {
+        UUID entityUuid)
+    {
         return calendarDao.delete(entityUuid);
     }
 
@@ -108,6 +111,6 @@ public class CalendarResource implements CalendarCrud {
     @Timed
     @Override
     public List<Calendar> getAll() {
-        return null;
+        return calendarDao.getAll();
     }
-}
+    }

@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
@@ -18,13 +17,10 @@ public abstract class BaseEntity<Entity extends BaseEntity> {
     @JsonIgnore
     private UUID uuid;
 
-    @JsonProperty
     private LocalDate createDate;
 
-    @JsonProperty
     private LocalDate updateDate;
 
-    @JsonProperty
     private Long etag;
 
     @JsonGetter
