@@ -2,7 +2,6 @@ package com.j0llysnowman.movies.domain;
 
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.j0llysnowman.movies.domain.enums.EntityCollection;
 
 import lombok.Getter;
@@ -15,13 +14,10 @@ import lombok.Setter;
 @Setter
 public class UriParts<Entity extends BaseEntity> {
 
-    @JsonProperty
     private String uri;
 
-    @JsonProperty
     private UUID uuid;
 
-    @JsonProperty
     private EntityCollection entityCollection;
 
     public UriParts(Entity entity) {

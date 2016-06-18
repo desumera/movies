@@ -2,8 +2,6 @@ package com.j0llysnowman.movies.domain;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -16,7 +14,6 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 public class Calendar extends BaseEntity<Calendar> {
 
-    @JsonProperty
     private List<Reservation> reservations;
 
     @Override
